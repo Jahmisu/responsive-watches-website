@@ -730,34 +730,6 @@ body.dark-theme {
   margin-bottom: var(--mb-1-5);
 }
 
-/*=============== NEWSLETTER ===============*/
-.newsletter__bg {
-  background-color: var(--first-color);
-  padding: 3rem 1.5rem;
-  text-align: center;
-  row-gap: 2.5rem;
-}
-
-.newsletter__title {
-  font-size: var(--h1-font-size);
-  color: hsl(0, 0%, 15%);
-  margin-bottom: var(--mb-1-5);
-}
-
-.newsletter__description {
-  color: hsl(0, 0%, 35%);
-}
-
-.newsletter__subscribe {
-  display: flex;
-  flex-direction: column;
-  row-gap: .75rem;
-}
-
-.newsletter__input {
-  border: none;
-  outline: none;
-  background-color: hsl(0, 0%, 94%);
   padding: 1.25rem 1rem;
   color: hsl(0, 0%, 15%);
 }
@@ -877,9 +849,80 @@ body.dark-theme {
   cursor: pointer;
 }
 
+.cart {
+  /* ensure entire cart panel fits in viewport and scrolls if needed */
+  max-height: 90vh;
+  overflow: auto;
+}
+
 .cart__container {
   display: grid;
   row-gap: 1.5rem;
+  /* height limited by parent .cart; this handles many items */
+}
+
+/* checkout button under totals */
+.cart__checkout {
+  display: block;
+  width: 100%;
+  padding: .75rem;
+  margin-top: 1rem;
+  background-color: var(--first-color-light);
+  color: var(--title-color);
+  text-align: center;
+  border: none;
+  cursor: pointer;
+}
+.cart__checkout:hover {
+  background-color: var(--first-color);
+  color: #fff;
+}
+
+/* modal for bank details */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.modal.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+.modal.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+.modal-content {
+  background: var(--container-color);
+  padding: 2rem;
+  border-radius: .5rem;
+  width: 90%;
+  max-width: 400px;
+}
+.modal-content input {
+  width: 100%;
+  margin-bottom: .75rem;
+  padding: .5rem;
+  border: 1px solid var(--border-color);
+}
+
+/* ensure scrollbar is visible on small devices */
+.cart__container::-webkit-scrollbar {
+  width: 8px;
+}
+.cart__container::-webkit-scrollbar-thumb {
+  background-color: var(--first-color);
+  border-radius: 4px;
 }
 
 .cart__card {
@@ -1100,17 +1143,6 @@ body.dark-theme {
     height: 155px;
   }
 
-  .newsletter__bg {
-    text-align: initial;
-    column-gap: 2rem;
-    padding: 4.5rem;
-  }
-  .newsletter__subscribe {
-    flex-direction: row;
-  }
-  .newsletter__input {
-    width: 100%;
-  }
 
   .footer__container {
     grid-template-columns: repeat(4, max-content);
