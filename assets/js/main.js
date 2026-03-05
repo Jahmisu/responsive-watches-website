@@ -322,3 +322,91 @@ checkoutForm && checkoutForm.addEventListener('submit', e => {
         window.location.hash = '#home';
     });
 });
+
+/*=============== AUTHENTICATION ===============*/
+const loginBtn = document.getElementById('login-btn');
+const signupBtn = document.getElementById('signup-btn');
+const logoutBtn = document.getElementById('logout-btn');
+const loginModal = document.getElementById('login-modal');
+const signupModal = document.getElementById('signup-modal');
+const loginForm = document.getElementById('login-form');
+const signupForm = document.getElementById('signup-form');
+
+function updateAuthUI() {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    const userDisplay = document.getElementById('user-display');
+    if (currentUser && currentUser.username) {
+        loginBtn.classList.add('hidden');
+        signupBtn.classList.add('hidden');
+        logoutBtn.classList.remove('hidden');
+        if (userDisplay) {
+            userDisplay.textContent = currentUser.username;
+            userDisplay.classList.remove('hidden');
+        }
+    } else {
+        loginBtn.classList.remove('hidden');
+        signupBtn.classList.remove('hidden');
+        logoutBtn.classList.add('hidden');
+        if (userDisplay) {
+            userDisplay.textContent = '';
+            userDisplay.classList.add('hidden');
+        }
+    }
+}
+
+loginBtn && loginBtn.addEventListener('click', () => showModal(loginModal));
+signupBtn && signupBtn.addEventListener('click', () => showModal(signupModal));
+logoutBtn && logoutBtn.addEventListener('click', () => {
+    localStorage.removeItem('currentUser');
+    updateAuthUI();
+    Swal.fire('Logged out', 'You have been logged out.', 'info');
+});
+
+loginForm && loginForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const email = e.target.email.value.trim();
+    const u = e.target.username.value.trim();
+    if (!email || !email.includes('@gmail.com')) {
+        Swal.fire('Error', 'Email must include @gmail.com', 'error');
+        return;
+    }
+    if (u) {
+        const user = { username: u, email };
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        updateAuthUI();
+        hideModal(loginModal);
+        Swal.fire('Welcome', `Hello ${u}`, 'success');
+    } else {
+        Swal.fire('Error', 'Please enter a username.', 'error');
+    }
+});
+
+signupForm && signupForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const email = e.target.email.value.trim();
+    const u = e.target.username.value.trim();
+    if (!email || !email.includes('@gmail.com')) {
+        Swal.fire('Error', 'Email must include @gmail.com', 'error');
+        return;
+    }
+    if (u) {
+        const user = { username: u, email };
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        updateAuthUI();
+        hideModal(signupModal);
+        Swal.fire('Success', `Welcome ${u}`, 'success');
+    } else {
+        Swal.fire('Error', 'Please enter a username.', 'error');
+    }
+});
+
+// clicking outside auth modals closes them
+loginModal && loginModal.addEventListener('click', e => {
+    if (e.target === loginModal) hideModal(loginModal);
+});
+signupModal && signupModal.addEventListener('click', e => {
+    if (e.target === signupModal) hideModal(signupModal);
+});
+
+window.addEventListener('load', updateAuthUI);
+

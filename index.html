@@ -58,8 +58,17 @@
           <!-- Theme change button -->
           <i class="bx bx-moon change-theme" id="theme-button"></i>
 
+          <!-- shopping bag should be right after theme -->
           <div class="nav__shop" id="cart-shop">
             <i class="bx bx-shopping-bag"></i>
+          </div>
+
+          <!-- authentication buttons -->
+          <div class="nav__auth" id="nav-auth">
+            <button id="login-btn" class="nav__button">Log In</button>
+            <button id="signup-btn" class="nav__button">Sign Up</button>
+            <span id="user-display" class="nav__user hidden"></span>
+            <button id="logout-btn" class="nav__button hidden">Log Out</button>
           </div>
 
           <div class="nav__toggle" id="nav-toggle">
@@ -105,6 +114,51 @@
             required
           />
           <button type="submit" class="button">Submit</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- authentication modals -->
+    <div id="login-modal" class="modal hidden">
+      <div class="modal-content">
+        <h2>Log In</h2>
+        <form id="login-form">
+          <input
+            type="email"
+            name="email"
+            placeholder="Email (must be @gmail.com)"
+            required
+          />
+          <input type="text" name="username" placeholder="Username" required />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            required
+          />
+          <button type="submit" class="button">Log In</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="signup-modal" class="modal hidden">
+      <div class="modal-content">
+        <h2>Sign Up</h2>
+        <form id="signup-form">
+          <input
+            type="email"
+            name="email"
+            placeholder="Email (must be @gmail.com)"
+            required
+          />
+          <input type="text" name="username" placeholder="Username" required />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            required
+          />
+          <button type="submit" class="button">Sign Up</button>
         </form>
       </div>
     </div>

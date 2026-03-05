@@ -236,6 +236,28 @@ body.dark-theme {
   column-gap: 1rem;
 }
 
+/* auth buttons in navbar */
+.nav__auth .nav__button {
+  background-color: var(--button-color-alt);
+  color: #fff;
+  padding: .4rem .8rem;
+  border-radius: .25rem;
+  font-size: var(--small-font-size);
+  transition: background .3s;
+}
+.nav__user {
+  color: var(--title-color);
+  font-size: var(--small-font-size);
+  margin-right: .5rem;
+}
+.nav__auth .nav__button:hover {
+  background-color: var(--button-color);
+}
+
+.hidden {
+  display: none !important;
+}
+
 .nav__toggle, 
 .nav__shop {
   font-size: 1.25rem;
